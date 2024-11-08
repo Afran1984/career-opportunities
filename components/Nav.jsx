@@ -1,9 +1,44 @@
+// Add the "use client" directive at the top of the file
+"use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+    {
+        name: "Home",
+        path: "/",
+    },
+    {
+        name: "Services",
+        path: "/services",
+    },
+    {
+        name: "Resume",
+        path: "/resume",
+    },
+    {
+        name: "Work",
+        path: "/work",
+    },
+    {
+        name: "Contact",
+        path: "/contact",
+    },
+    {
+        name: "About",
+        path: "/about",
+    },
+];
 
 const Nav = () => {
+    const pathname = usePathname();
+
     return (
-        <nav>
-            Desktop Nav
+        <nav className="flex gap-8">
+           {links.map((link, index) => {
+               return <Link key={index} href={link.path} className={`${link.path === pathname && "text-accent border-b-2 border-accent"} capitalize font-medium hover:text-accent transition-all`}> {link.name}</Link>;
+           })}
         </nav>
     );
 };
